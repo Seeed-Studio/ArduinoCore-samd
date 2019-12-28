@@ -113,21 +113,21 @@ static const uint8_t DAC0 = PIN_DAC0;
  */
 #define SPI_INTERFACES_COUNT 3
 
-// SPI interface for QSPI flash
-#define PIN_SPI_MISO         (30u)
-#define PIN_SPI_SCK          (31u)
-#define PIN_SPI_MOSI         (32u)
-#define PERIPH_SPI           sercom3
-#define PAD_SPI_TX           SPI_PAD_2_SCK_3  // MOSI / SCK
-#define PAD_SPI_RX           SERCOM_RX_PAD_0  // MISO
+// non-existent SPI interface
+#define PIN_SPI2_MISO         (30u)
+#define PIN_SPI2_SCK          (31u)
+#define PIN_SPI2_MOSI         (32u)
+#define PERIPH_SPI2           sercom3
+#define PAD_SPI2_TX           SPI_PAD_2_SCK_3  // MOSI / SCK
+#define PAD_SPI2_RX           SERCOM_RX_PAD_0  // MISO
 
-static const uint8_t SS	  = 33 ;
-static const uint8_t MOSI = PIN_SPI_MOSI ;
-static const uint8_t MISO = PIN_SPI_MISO ;
-static const uint8_t SCK  = PIN_SPI_SCK ;
+static const uint8_t SS2	  = 33 ;
+static const uint8_t MOSI2 = PIN_SPI2_MOSI ;
+static const uint8_t MISO2 = PIN_SPI2_MISO ;
+static const uint8_t SCK2  = PIN_SPI2_SCK ;
 
 
-// Extra hardware SPI for Gizmo
+// Extra hardware SPI for Gizmo (non-existent)
 #define PIN_SPI1_SCK          (40u)
 #define PIN_SPI1_MOSI         (39u)
 #define PIN_SPI1_MISO         (41u)
@@ -136,24 +136,24 @@ static const uint8_t SCK  = PIN_SPI_SCK ;
 #define PAD_SPI1_RX           SERCOM_RX_PAD_2  // MISO not avail
 
 static const uint8_t SS1	  = 42 ;
-static const uint8_t MOSI1 = PIN_SPI_MOSI ;
-static const uint8_t MISO1 = PIN_SPI_MISO ;
-static const uint8_t SCK1  = PIN_SPI_SCK ;
+static const uint8_t MOSI1 = PIN_SPI1_MOSI ;
+static const uint8_t MISO1 = PIN_SPI1_MISO ;
+static const uint8_t SCK1  = PIN_SPI1_SCK ;
 
 
-// Extra hardware for SD card
-#define PIN_SPI2_SCK          (10u)
-#define PIN_SPI2_MOSI         (9u)
-#define PIN_SPI2_MISO         (6u)
-#define PIN_SPI2_SS           (5u)
-#define PERIPH_SPI2           sercom0
-#define PAD_SPI2_TX           SPI_PAD_2_SCK_3  // MOSI / SCK
-#define PAD_SPI2_RX           SERCOM_RX_PAD_1  // MISO not avail
+// Functional SPI interface on D6/D9/D10
+#define PIN_SPI_SCK          (10u)
+#define PIN_SPI_MOSI         (9u)
+#define PIN_SPI_MISO         (6u)
+#define PIN_SPI_SS           (5u)
+#define PERIPH_SPI           sercom0
+#define PAD_SPI_TX           SPI_PAD_2_SCK_3  // MOSI / SCK
+#define PAD_SPI_RX           SERCOM_RX_PAD_1  // MISO avail?
 
-static const uint8_t SS2   = 5 ;
-static const uint8_t MOSI2 = PIN_SPI2_MOSI ;
-static const uint8_t MISO2 = PIN_SPI2_MISO ;
-static const uint8_t SCK2  = PIN_SPI2_SCK ;
+static const uint8_t SS   = 5 ;
+static const uint8_t MOSI = PIN_SPI_MOSI ;
+static const uint8_t MISO = PIN_SPI_MISO ;
+static const uint8_t SCK  = PIN_SPI_SCK ;
 
 
 // Needed for SD library
