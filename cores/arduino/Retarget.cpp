@@ -53,6 +53,8 @@ int _getpid(void) {}
 extern int __real__write (int fd, const char *ptr, int len);
 
 int __wrap__write (int fd, const char *ptr, int len) {
+	(void)fd;	// UNUSED
+
 	int i;
 
 	if (!Serial) {
