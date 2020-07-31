@@ -31,8 +31,8 @@ extern "C" {
 #define FALLING 3
 #define RISING 4
 
-#define DEFAULT 1
-#define EXTERNAL 0
+//#define DEFAULT 1
+//#define EXTERNAL 0
 
 typedef void (*voidFuncPtr)(void);
 
