@@ -153,9 +153,9 @@ void TCC3_2_Handler              ( void ) __attribute__ ((weak, alias("Dummy_Han
 void TCC4_0_Handler              ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void TCC4_1_Handler              ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void TCC4_2_Handler              ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void TC0_Handler                 ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
+void TC0_Handler                 ( void ) __attribute__ ((weak)); //used in Tone.cpp
 void TC1_Handler                 ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void TC2_Handler                 ( void ) __attribute__ ((weak)); //used in Tone.cpp
+void TC2_Handler                 ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void TC3_Handler                 ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void TC4_Handler                 ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void TC5_Handler                 ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
