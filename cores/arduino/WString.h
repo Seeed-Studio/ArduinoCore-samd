@@ -73,6 +73,8 @@ public:
 	explicit String(double, unsigned char decimalPlaces=2);
 	~String(void);
 
+	static String format(const char* format, ...);
+
 	// memory management
 	// return true on success, false on failure (in which case, the string
 	// is left unchanged).  reserve(0), if successful, will validate an

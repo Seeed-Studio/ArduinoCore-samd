@@ -22,6 +22,8 @@
 #include "WString.h"
 #include "itoa.h"
 #include "avr/dtostrf.h"
+#include <stdio.h>
+#include <stdarg.h>
 
 /*********************************************/
 /*  Constructors                             */
@@ -124,6 +126,18 @@ String::String(double value, unsigned char decimalPlaces)
 String::~String()
 {
 	free(buffer);
+}
+
+String String::format(const char* format, ...)
+{
+	va_list arg;
+	va_start(arg, format);
+	const int len = vsnprintf(nullptr, 0, format, arg);
+	char str[len + 1];
+	vsnprintf(str, sizeof(str), format, arg);
+	va_end(arg);
+
+	return String(str);
 }
 
 /*********************************************/
