@@ -54,7 +54,7 @@ extern "C"
  *----------------------------------------------------------------------------*/
 
 // Number of pins defined in PinDescription array
-#define PINS_COUNT (93u)
+#define PINS_COUNT (sizeof(g_APinDescription) / sizeof(g_APinDescription[0]))
 #define NUM_DIGITAL_PINS (23u)
 #define NUM_ANALOG_INPUTS (14u)
 #define NUM_ANALOG_OUTPUTS (2u)
@@ -262,12 +262,56 @@ static const uint8_t DAC1 = PIN_DAC1;
  * Serial interfaces
  */
 
-// Serial1
-#define PIN_SERIAL1_RX (41ul)
-#define PIN_SERIAL1_TX (40ul)
+ // Serial1 (GPIO Host)
+#define PIN_SERIAL1_RX (BCM15)
+#define PIN_SERIAL1_TX (BCM14)
 #define PAD_SERIAL1_RX (SERCOM_RX_PAD_1)
 #define PAD_SERIAL1_TX (UART_TX_PAD_0)
 #define SERCOM_SERIAL1 sercom2
+#define INTERRUPT_HANDLER_IMPLEMENT_SERIAL1(uart) \
+	void SERCOM2_0_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM2_1_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM2_2_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM2_3_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	}
+
+// Serial1x (GPIO Device)
+//  Uart Serial1x(&SERCOM_SERIAL1X, PIN_SERIAL1X_RX, PIN_SERIAL1X_TX, PAD_SERIAL1X_RX, PAD_SERIAL1X_TX);
+//  INTERRUPT_HANDLER_IMPLEMENT_SERIAL1X(Serial1x)
+
+#define PIN_SERIAL1X_RX	(93ul)
+#define PIN_SERIAL1X_TX	(94ul)
+#define PAD_SERIAL1X_RX	(SERCOM_RX_PAD_1)
+#define PAD_SERIAL1X_TX	(UART_TX_PAD_0)
+#define SERCOM_SERIAL1X	sercom4
+#define INTERRUPT_HANDLER_IMPLEMENT_SERIAL1X(uart) \
+	void SERCOM4_0_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM4_1_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM4_2_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM4_3_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	}
 
 // Serial2
 #define PIN_SERIAL2_RX (83ul)
@@ -275,6 +319,23 @@ static const uint8_t DAC1 = PIN_DAC1;
 #define PAD_SERIAL2_RX (SERCOM_RX_PAD_1)
 #define PAD_SERIAL2_TX (UART_TX_PAD_0)
 #define SERCOM_SERIAL2 sercom1
+#define INTERRUPT_HANDLER_IMPLEMENT_SERIAL2(uart) \
+	void SERCOM1_0_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM1_1_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM1_2_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM1_3_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	}
 
 /*
  * Wire Interfaces

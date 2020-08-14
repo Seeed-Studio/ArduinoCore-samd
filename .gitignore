@@ -4,3 +4,4 @@
 bootloaders/*/build/
 *~
 git-archive-full.sh
+.vs/

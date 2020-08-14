@@ -90,9 +90,9 @@ const PinDescription g_APinDescription[] =
         //39 MIC INPUT
         {PORTC, 30, PIO_ANALOG, PIN_ATTR_ANALOG_ALT, ADC_Channel12, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_14}, //MIC_INPUT
 
-        //40..41 UART Serial1
-        {PORTB, 26, PIO_SERCOM, (PIN_ATTR_DIGITAL | PIN_ATTR_PWM_F), No_ADC_Channel, TCC1_CH2, NOT_ON_TIMER, EXTERNAL_INT_12}, //UART1_TX, SERCOM2.0
-        {PORTB, 27, PIO_SERCOM, (PIN_ATTR_DIGITAL | PIN_ATTR_PWM_F), No_ADC_Channel, TCC1_CH3, NOT_ON_TIMER, EXTERNAL_INT_13}, //UART1_RX, SERCOM2.1
+        //40..41 UART Serial1 (GPIO Host)
+        {PORTB, 26, PIO_SERCOM, (PIN_ATTR_DIGITAL | PIN_ATTR_PWM_F), No_ADC_Channel, TCC1_CH2, NOT_ON_TIMER, EXTERNAL_INT_12}, //SERCOM2.0
+        {PORTB, 27, PIO_SERCOM, (PIN_ATTR_DIGITAL | PIN_ATTR_PWM_F), No_ADC_Channel, TCC1_CH3, NOT_ON_TIMER, EXTERNAL_INT_13}, //SERCOM2.1
 
         // 42..44 - USB
         {PORTA, 24, PIO_COM, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_8}, // USB_D-
@@ -183,8 +183,11 @@ const PinDescription g_APinDescription[] =
 
         //91..92 OUTPUT_CTR
         {PORTC, 14, PIO_DIGITAL, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_14},
-        {PORTC, 15, PIO_DIGITAL, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_15}
+        {PORTC, 15, PIO_DIGITAL, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_15},
 
+        //93..94 UART Serial1x (GPIO Device)
+        {PORTB, 26, PIO_SERCOM_ALT, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_12}, //SERCOM4.1
+        {PORTB, 27, PIO_SERCOM_ALT, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_13}, //SERCOM4.0
 };
 
 const void *g_apTCInstances[TCC_INST_NUM + TC_INST_NUM] = {TCC0, TCC1, TCC2, TCC3, TCC4, TC0, TC1, TC2, TC3, TC4, TC5, TC6, TC7};
@@ -201,38 +204,7 @@ SERCOM sercom6(SERCOM6);
 SERCOM sercom7(SERCOM7);
 
 Uart Serial1(&SERCOM_SERIAL1, PIN_SERIAL1_RX, PIN_SERIAL1_TX, PAD_SERIAL1_RX, PAD_SERIAL1_TX);
+INTERRUPT_HANDLER_IMPLEMENT_SERIAL1(Serial1)
+
 Uart Serial2(&SERCOM_SERIAL2, PIN_SERIAL2_RX, PIN_SERIAL2_TX, PAD_SERIAL2_RX, PAD_SERIAL2_TX);
-
-void SERCOM1_0_Handler()
-{
-  Serial2.IrqHandler();
-}
-void SERCOM1_1_Handler()
-{
-  Serial2.IrqHandler();
-}
-void SERCOM1_2_Handler()
-{
-  Serial2.IrqHandler();
-}
-void SERCOM1_3_Handler()
-{
-  Serial2.IrqHandler();
-}
-
-void SERCOM2_0_Handler()
-{
-  Serial1.IrqHandler();
-}
-void SERCOM2_1_Handler()
-{
-  Serial1.IrqHandler();
-}
-void SERCOM2_2_Handler()
-{
-  Serial1.IrqHandler();
-}
-void SERCOM2_3_Handler()
-{
-  Serial1.IrqHandler();
-}
+INTERRUPT_HANDLER_IMPLEMENT_SERIAL2(Serial2)
