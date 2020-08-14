@@ -57,7 +57,7 @@ extern "C"
  *----------------------------------------------------------------------------*/
 
 // Number of pins defined in PinDescription array
-#define PINS_COUNT (93u)
+#define PINS_COUNT (sizeof(g_APinDescription) / sizeof(g_APinDescription[0]))
 #define NUM_DIGITAL_PINS (23u)
 #define NUM_ANALOG_INPUTS (14u)
 #define NUM_ANALOG_OUTPUTS (2u)
@@ -265,19 +265,65 @@ static const uint8_t DAC1 = PIN_DAC1;
  * Serial interfaces
  */
 
-// Serial1
-#define PIN_SERIAL1_RX (41ul)
-#define PIN_SERIAL1_TX (40ul)
-#define PAD_SERIAL1_RX (SERCOM_RX_PAD_1)
-#define PAD_SERIAL1_TX (UART_TX_PAD_0)
-#define SERCOM_SERIAL1 sercom2
-
 // Serial2
 #define PIN_SERIAL2_RX (83ul)
 #define PIN_SERIAL2_TX (82ul)
 #define PAD_SERIAL2_RX (SERCOM_RX_PAD_1)
 #define PAD_SERIAL2_TX (UART_TX_PAD_0)
 #define SERCOM_SERIAL2 sercom1
+
+// UART GPIO (Host)
+//  static Uart GpioSerial(&SERCOM_GPIO_SERIAL, PIN_GPIO_SERIAL_RX, PIN_GPIO_SERIAL_TX, PAD_GPIO_SERIAL_RX, PAD_GPIO_SERIAL_TX);
+//  INTERRUPT_HANDLER_IMPLEMENT_GPIO_SERIAL(GpioSerial)
+#define PIN_GPIO_SERIAL_RX		(BCM15)
+#define PIN_GPIO_SERIAL_TX		(BCM14)
+#define PAD_GPIO_SERIAL_RX		(SERCOM_RX_PAD_1)
+#define PAD_GPIO_SERIAL_TX		(UART_TX_PAD_0)
+#define SERCOM_GPIO_SERIAL		sercom2
+#define INTERRUPT_HANDLER_IMPLEMENT_GPIO_SERIAL(uart) \
+	void SERCOM2_0_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM2_1_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM2_2_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM2_3_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	}
+
+// UART GPIO (Device)
+//  Uart GpioSerial(&SERCOM_GPIO_SERIAL_X, PIN_GPIO_SERIAL_X_RX, PIN_GPIO_SERIAL_X_TX, PAD_GPIO_SERIAL_X_RX, PAD_GPIO_SERIAL_X_TX);
+//  INTERRUPT_HANDLER_IMPLEMENT_GPIO_SERIAL_X(GpioSerial)
+
+#define PIN_GPIO_SERIAL_X_RX	(93ul)
+#define PIN_GPIO_SERIAL_X_TX	(94ul)
+#define PAD_GPIO_SERIAL_X_RX	(SERCOM_RX_PAD_1)
+#define PAD_GPIO_SERIAL_X_TX	(UART_TX_PAD_0)
+#define SERCOM_GPIO_SERIAL_X	sercom4
+#define INTERRUPT_HANDLER_IMPLEMENT_GPIO_SERIAL_X(uart) \
+	void SERCOM4_0_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM4_1_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM4_2_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	} \
+	void SERCOM4_3_Handler() \
+	{ \
+		(uart).IrqHandler(); \
+	}
 
 /*
  * Wire Interfaces
@@ -476,7 +522,6 @@ extern SERCOM sercom5;
 extern SERCOM sercom6;
 extern SERCOM sercom7;
 
-extern Uart Serial1;
 extern Uart Serial2;
 
 #endif
@@ -499,8 +544,8 @@ extern Uart Serial2;
 #define SERIAL_PORT_USBVIRTUAL Serial
 #define SERIAL_PORT_MONITOR Serial
 // Serial has no physical pins broken out, so it's not listed as HARDWARE port
-#define SERIAL_PORT_HARDWARE Serial1
-#define SERIAL_PORT_HARDWARE_OPEN Serial1
+#define SERIAL_PORT_HARDWARE
+#define SERIAL_PORT_HARDWARE_OPEN
 #define RTL8720D Serial2
 // Alias Serial to SerialUSB
 #define SerialUSB Serial
