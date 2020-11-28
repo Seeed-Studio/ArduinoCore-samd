@@ -26,6 +26,8 @@
 #include <string.h>
 #include <math.h>
 
+#define CORE_HAS_LIBB64
+
 typedef bool boolean;
 typedef uint8_t byte;
 typedef uint16_t word;
