@@ -311,6 +311,41 @@ rolawan.menu.debug.off=Off
 rolawan.menu.debug.on=On
 rolawan.menu.debug.on.build.flags.debug=-g -DDEBUG=1
 
+# Wio LTE CAT.1 M0 (SAMD21)
+# ------------------------------
+Wio_LTE_CAT.name=Wio LTE Cat.1
+Wio_LTE_CAT.vid.0=0x2886
+Wio_LTE_CAT.pid.0=0x8031
+Wio_LTE_CAT.vid.1=0x2886
+Wio_LTE_CAT.pid.1=0x0031
+Wio_LTE_CAT.upload.tool=bossac
+Wio_LTE_CAT.upload.protocol=sam-ba
+Wio_LTE_CAT.upload.maximum_size=262144
+Wio_LTE_CAT.upload.offset=0x2000
+Wio_LTE_CAT.upload.use_1200bps_touch=true
+Wio_LTE_CAT.upload.wait_for_upload_port=true
+Wio_LTE_CAT.upload.native_usb=true
+Wio_LTE_CAT.build.mcu=cortex-m0plus
+Wio_LTE_CAT.build.f_cpu=48000000L
+Wio_LTE_CAT.build.usb_product="Wio LTE Cat.1"
+Wio_LTE_CAT.build.usb_manufacturer="Seeed"
+Wio_LTE_CAT.build.board=WIO_LTE_CAT
+Wio_LTE_CAT.build.core=arduino
+Wio_LTE_CAT.build.extra_flags= -DARDUINO_SAMD_ZERO -D__SAMD21__ -D__SAMD21G18A__ -DARM_MATH_CM0PLUS -DWIO_LTE_CAT {build.usb_flags}
+Wio_LTE_CAT.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
+Wio_LTE_CAT.build.openocdscript=openocd_scripts/Wio_LTE_Cat.cfg
+Wio_LTE_CAT.build.variant=Wio_LTE_Cat.1
+Wio_LTE_CAT.build.variant_system_lib=
+Wio_LTE_CAT.build.vid=0x2886
+Wio_LTE_CAT.build.pid=0x8031
+Wio_LTE_CAT.bootloader.tool=openocd
+Wio_LTE_CAT.bootloader.file=wio_lte_cat.1/bootloader-wio_lte_cat.1.bin
+Wio_LTE_CAT.menu.usbstack.arduino=Arduino
+Wio_LTE_CAT.menu.usbstack.tinyusb=TinyUSB
+Wio_LTE_CAT.menu.usbstack.tinyusb.build.flags.usbstack=-DUSE_TINYUSB
+Wio_LTE_CAT.menu.debug.off=Off
+Wio_LTE_CAT.menu.debug.on=On
+Wio_LTE_CAT.menu.debug.on.build.flags.debug=-g -DDEBUG=1
 
 # Seeed Grove UI Wireless (SAMD51)
 # ------------------------------
