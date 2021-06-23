@@ -20,7 +20,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5---3rd-party-Hardware-specification
 
 name=Seeed SAMD (32-bits ARM Cortex-M0+ and Cortex-M4) Boards
-version=1.8.1
+version=1.8.2
 
 # Compile variables
 # -----------------
@@ -74,7 +74,7 @@ compiler.ar.extra_flags=
 compiler.elf2hex.extra_flags=
 
 compiler.arm.cmsis.c.flags="-I{runtime.tools.CMSIS-5.7.0.path}/CMSIS/Core/Include/" "-I{runtime.tools.CMSIS-5.7.0.path}/CMSIS/DSP/Include/" "-I{runtime.tools.CMSIS-Atmel-1.2.1.path}/CMSIS-Atmel/CMSIS/Device/ATMEL/"
-compiler.arm.cmsis.ldflags="-L{runtime.tools.CMSIS-5.7.0.path}/CMSIS/Lib/GCC/" -larm_cortexM0l_math 
+compiler.arm.cmsis.ldflags="-L{runtime.tools.CMSIS-5.7.0.path}/CMSIS/DSP/Lib/GCC/" -larm_cortexM0l_math -lm
 
 compiler.libraries.ldflags=
 

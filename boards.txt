@@ -52,7 +52,7 @@ seeed_wio_terminal.build.vid=0x2886
 seeed_wio_terminal.build.pid=0x802D
 seeed_wio_terminal.bootloader.tool=openocd
 seeed_wio_terminal.bootloader.file=wio_terminal/bootloader-wio-terminal.bin
-seeed_wio_terminal.compiler.arm.cmsis.ldflags="-L{build.variant.path}" -larm_cortexM4lf_math -mfloat-abi=hard -mfpu=fpv4-sp-d16
+seeed_wio_terminal.compiler.arm.cmsis.ldflags="-L{runtime.tools.CMSIS-5.7.0.path}/CMSIS/DSP/Lib/GCC/" -larm_cortexM4lf_math -lm -mfloat-abi=hard -mfpu=fpv4-sp-d16
 seeed_wio_terminal.menu.role.master=Master
 seeed_wio_terminal.menu.role.master.build.flags.role=-DROLE=0
 seeed_wio_terminal.menu.role.slave=Slave
@@ -341,7 +341,7 @@ seeed_grove_ui_wireless.build.vid=0x2886
 seeed_grove_ui_wireless.build.pid=0x0000
 seeed_grove_ui_wireless.bootloader.tool=openocd
 seeed_grove_ui_wireless.bootloader.file=groveUIWireless/bootloader-groveUIWireless_m4-v3.7.0-Seeed.bin
-seeed_grove_ui_wireless.compiler.arm.cmsis.ldflags="-L{build.variant.path}" -larm_cortexM4lf_math -mfloat-abi=hard -mfpu=fpv4-sp-d16
+seeed_grove_ui_wireless.compiler.arm.cmsis.ldflags="-L{runtime.tools.CMSIS-5.7.0.path}/CMSIS/DSP/Lib/GCC/" -larm_cortexM4lf_math -mfloat-abi=hard -mfpu=fpv4-sp-d16
 seeed_grove_ui_wireless.menu.cache.on=Enabled
 seeed_grove_ui_wireless.menu.cache.on.build.cache_flags=-DENABLE_CACHE
 seeed_grove_ui_wireless.menu.cache.off=Disabled
