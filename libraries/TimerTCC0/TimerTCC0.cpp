@@ -6,6 +6,7 @@
 #include "Arduino.h"
 #include "TimerTCC0.h"
 
+#ifdef __SAMD21__
 
 TimerTCC0 TimerTcc0;
 
@@ -118,6 +119,9 @@ void TimerTCC0::stop()
     Tcc* TC = (Tcc*) TCC0; // get timer struct
     TC->CTRLBSET.reg |= TCC_CTRLBSET_CMD_STOP; // Stop counter    
 }
+#else
+#error TCC0 is only on SAMD21 MCU! Use TC3 instead!
 
+#endif
 
 #endif
