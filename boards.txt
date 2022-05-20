@@ -21,6 +21,7 @@ menu.opt=Optimize
 menu.maxqspi=Max QSPI
 menu.usbstack=USB Stack
 menu.debug=Debug
+menu.sercom4=SERCOM4
 menu.txrxled=TX/RX LED
 
 # Seeed Wio Terminal (SAMD51)
@@ -149,7 +150,7 @@ seeed_XIAO_m0.build.usb_product="Seeed XIAO M0"
 seeed_XIAO_m0.build.usb_manufacturer="Seeed"
 seeed_XIAO_m0.build.board=SEEED_XIAO_M0
 seeed_XIAO_m0.build.core=arduino
-seeed_XIAO_m0.build.extra_flags= -DARDUINO_SAMD_ZERO -D__SAMD21__ -D__SAMD21G18A__ -DARM_MATH_CM0PLUS -DSEEED_XIAO_M0 {build.usb_flags}
+seeed_XIAO_m0.build.extra_flags= -DARDUINO_SAMD_ZERO -D__SAMD21__ -D__SAMD21G18A__ -DARM_MATH_CM0PLUS -DSEEED_XIAO_M0 {build.usb_flags} {sercom4_flag}
 seeed_XIAO_m0.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
 seeed_XIAO_m0.build.openocdscript=openocd_scripts/XIAO_m0.cfg
 seeed_XIAO_m0.build.variant=XIAO_m0
@@ -164,6 +165,10 @@ seeed_XIAO_m0.menu.usbstack.tinyusb.build.flags.usbstack=-DUSE_TINYUSB
 seeed_XIAO_m0.menu.debug.off=Off
 seeed_XIAO_m0.menu.debug.on=On
 seeed_XIAO_m0.menu.debug.on.build.flags.debug=-g -DDEBUG=1
+seeed_XIAO_m0.menu.sercom4.include=USART
+seeed_XIAO_m0.menu.sercom4.include.sercom4_flag=
+seeed_XIAO_m0.menu.sercom4.exclude=None
+seeed_XIAO_m0.menu.sercom4.exclude.sercom4_flag=-DNO_USART_INTERFACE
 
 
 # Seeed XIAO M0 (SAMD21)
@@ -409,5 +414,3 @@ seeed_grove_ui_wireless.menu.usbstack.tinyusb.build.flags.usbstack=-DUSE_TINYUSB
 seeed_grove_ui_wireless.menu.debug.off=Off
 seeed_grove_ui_wireless.menu.debug.on=On
 seeed_grove_ui_wireless.menu.debug.on.build.flags.debug=-g -DDEBUG=1
-
-

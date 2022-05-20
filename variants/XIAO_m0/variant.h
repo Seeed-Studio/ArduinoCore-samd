@@ -157,7 +157,6 @@ static const uint8_t SCL = PIN_WIRE_SCL;
 // ------------
 #ifdef __cplusplus
 #include "SERCOM.h"
-#include "Uart.h"
 
 // Instances of SERCOM
 extern SERCOM sercom0;
@@ -167,15 +166,20 @@ extern SERCOM sercom3;
 extern SERCOM sercom4;
 extern SERCOM sercom5;
 
+#ifndef NO_USART_INTERFACE
+
+#include "Uart.h"
+
 // Serial1
 extern Uart Serial1;
 #define PIN_SERIAL1_TX       (6ul)
 #define PIN_SERIAL1_RX       (7ul)
 #define PAD_SERIAL1_TX       (UART_TX_PAD_0)
 #define PAD_SERIAL1_RX       (SERCOM_RX_PAD_1)
+
+#endif // not NO_USART_INTERFACE
+
 #endif // __cplusplus
-
-
 
 // These serial port names are intended to allow libraries and architecture-neutral
 // sketches to automatically default to the correct port name for a particular type
@@ -194,8 +198,13 @@ extern Uart Serial1;
 //                            pins are NOT connected to anything by default.
 #define SERIAL_PORT_USBVIRTUAL      SerialUSB
 #define SERIAL_PORT_MONITOR         SerialUSB
+
+#ifndef NO_USART_INTERFACE
+
 #define SERIAL_PORT_HARDWARE        Serial1
 #define SERIAL_PORT_HARDWARE_OPEN   Serial1
+
+#endif
 
 // Alias Serial to SerialUSB
 #define Serial                      SerialUSB
