@@ -207,6 +207,8 @@ Uart Serial1(&SERCOM_SERIAL1, PIN_SERIAL1_RX, PIN_SERIAL1_TX, PAD_SERIAL1_RX, PA
 
 Uart Serial2(&SERCOM_SERIAL2, PIN_SERIAL2_RX, PIN_SERIAL2_TX, PAD_SERIAL2_RX, PAD_SERIAL2_TX);
 
+Uart Serial3(&SERCOM_SERIAL3, PIN_SERIAL3_RX, PIN_SERIAL3_TX, PAD_SERIAL3_RX, PAD_SERIAL3_TX);
+
 void SERCOM1_0_Handler()
 {
   Serial2.IrqHandler();
@@ -222,6 +224,23 @@ void SERCOM1_2_Handler()
 void SERCOM1_3_Handler()
 {
   Serial2.IrqHandler();
+}
+
+void SERCOM3_0_Handler()
+{
+  Serial3.IrqHandler();
+}
+void SERCOM3_1_Handler()
+{
+  Serial3.IrqHandler();
+}
+void SERCOM3_2_Handler()
+{
+  Serial3.IrqHandler();
+}
+void SERCOM3_3_Handler()
+{
+  Serial3.IrqHandler();
 }
 
 #if ROLE

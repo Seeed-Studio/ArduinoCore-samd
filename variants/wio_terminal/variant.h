@@ -286,43 +286,50 @@ static const uint8_t DAC1 = PIN_DAC1;
 #define PAD_SERIAL2_TX (UART_TX_PAD_0)
 #define SERCOM_SERIAL2 sercom1
 
+// Serial3
+#define PIN_SERIAL3_RX (46ul)
+#define PIN_SERIAL3_TX (45ul)
+#define PAD_SERIAL3_RX (SERCOM_RX_PAD_1)
+#define PAD_SERIAL3_TX (UART_TX_PAD_0)
+#define SERCOM_SERIAL3 sercom3
+
 /*
  * Wire Interfaces
  */
-#define WIRE_INTERFACES_COUNT 2
+#define WIRE_INTERFACES_COUNT 1
 
-#define PIN_WIRE_SDA (46ul)
-#define PIN_WIRE_SCL (45ul)
-#define PERIPH_WIRE sercom3
-#define WIRE_IT_HANDLER SERCOM3_Handler
-#define WIRE_IT_HANDLER_0    SERCOM3_0_Handler
-#define WIRE_IT_HANDLER_1    SERCOM3_1_Handler
-#define WIRE_IT_HANDLER_2    SERCOM3_2_Handler
-#define WIRE_IT_HANDLER_3    SERCOM3_3_Handler
+// #define PIN_WIRE_SDA (46ul)
+// #define PIN_WIRE_SCL (45ul)
+// #define PERIPH_WIRE sercom3
+// #define WIRE_IT_HANDLER SERCOM3_Handler
+// #define WIRE_IT_HANDLER_0    SERCOM3_0_Handler
+// #define WIRE_IT_HANDLER_1    SERCOM3_1_Handler
+// #define WIRE_IT_HANDLER_2    SERCOM3_2_Handler
+// #define WIRE_IT_HANDLER_3    SERCOM3_3_Handler
+
+  // static const uint8_t SDA = PIN_WIRE_SDA;
+  // static const uint8_t SCL = PIN_WIRE_SCL;
+
+#define PIN_WIRE_SDA (78ul)
+#define PIN_WIRE_SCL (77ul)
+#define PERIPH_WIRE sercom4
+#define WIRE_IT_HANDLER SERCOM4_Handler
+#define WIRE_IT_HANDLER_0    SERCOM4_0_Handler
+#define WIRE_IT_HANDLER_1    SERCOM4_1_Handler
+#define WIRE_IT_HANDLER_2    SERCOM4_2_Handler
+#define WIRE_IT_HANDLER_3    SERCOM4_3_Handler
 
   static const uint8_t SDA = PIN_WIRE_SDA;
   static const uint8_t SCL = PIN_WIRE_SCL;
 
-#define PIN_WIRE1_SDA (78ul)
-#define PIN_WIRE1_SCL (77ul)
-#define PERIPH_WIRE1 sercom4
-#define WIRE1_IT_HANDLER SERCOM4_Handler
-#define WIRE1_IT_HANDLER_0    SERCOM4_0_Handler
-#define WIRE1_IT_HANDLER_1    SERCOM4_1_Handler
-#define WIRE1_IT_HANDLER_2    SERCOM4_2_Handler
-#define WIRE1_IT_HANDLER_3    SERCOM4_3_Handler
-
-  static const uint8_t SDA1 = PIN_WIRE1_SDA;
-  static const uint8_t SCL1 = PIN_WIRE1_SCL;
-
-#define PIN_GYROSCOPE_WIRE_SDA PIN_WIRE1_SDA
-#define PIN_GYROSCOPE_WIRE_SCL PIN_WIRE1_SCL
-#define GYROSCOPE_WIRE Wire1
+#define PIN_GYROSCOPE_WIRE_SDA PIN_WIRE_SDA
+#define PIN_GYROSCOPE_WIRE_SCL PIN_WIRE_SCL
+#define GYROSCOPE_WIRE Wire
 #define GYROSCOPE_INT1 (79ul)
 
-#define WIO_LIS3DH_SDA PIN_WIRE1_SDA
-#define WIO_LIS3DH_SCL PIN_WIRE1_SCL
-#define WIO_LIS3DH_WiRE Wire1
+#define WIO_LIS3DH_SDA PIN_WIRE_SDA
+#define WIO_LIS3DH_SCL PIN_WIRE_SCL
+#define WIO_LIS3DH_WiRE Wire
 #define WIO_LIS3DH_INT (79ul)
 /*
  * SPI Interfaces
