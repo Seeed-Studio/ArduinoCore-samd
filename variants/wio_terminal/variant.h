@@ -500,6 +500,7 @@ extern SERCOM sercom7;
 
 extern Uart Serial1;
 extern Uart Serial2;
+extern Uart Serial3;
 
 #endif
 
