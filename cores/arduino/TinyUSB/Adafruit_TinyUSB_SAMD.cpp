@@ -62,6 +62,7 @@ extern "C" int serial1_printf(const char *__restrict format, ...)
   va_start(ap, format);
   vsnprintf(buf, sizeof(buf), format, ap);
   Serial1.write(buf);
+  Serial1.flush();
   va_end(ap);
 
 }
@@ -165,10 +166,10 @@ static void usb_hardware_init(void)
 
 	GCLK->PCHCTRL[USB_GCLK_ID].reg = GCLK_PCHCTRL_GEN_GCLK1_Val | (1 << GCLK_PCHCTRL_CHEN_Pos);
 
-	NVIC_SetPriority(USB_0_IRQn, 0UL);
-	NVIC_SetPriority(USB_1_IRQn, 0UL);
-	NVIC_SetPriority(USB_2_IRQn, 0UL);
-	NVIC_SetPriority(USB_3_IRQn, 0UL);
+	NVIC_SetPriority(USB_0_IRQn, 2UL);
+	NVIC_SetPriority(USB_1_IRQn, 2UL);
+	NVIC_SetPriority(USB_2_IRQn, 2UL);
+	NVIC_SetPriority(USB_3_IRQn, 2UL);
 #else
 	PM->APBBMASK.reg |= PM_APBBMASK_USB;
 
@@ -187,7 +188,7 @@ static void usb_hardware_init(void)
 	while (GCLK->STATUS.bit.SYNCBUSY)
 	;
 
-	NVIC_SetPriority((IRQn_Type) USB_IRQn, 0UL);
+	NVIC_SetPriority((IRQn_Type) USB_IRQn, 2UL);
 #endif
 }
 

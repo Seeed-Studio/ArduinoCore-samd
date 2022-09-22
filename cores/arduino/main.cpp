@@ -69,8 +69,11 @@ int main(void)
   delay(1);
 
 #if defined(USE_TINYUSB)
-  Adafruit_TinyUSB_Core_init();
+#if (CFG_TUSB_OS == OPT_OS_FREERTOS)
   tinyusb_task();
+#else
+  Adafruit_TinyUSB_Core_init();
+#endif
 #elif defined(USBCON)
   USBDevice.init();
   USBDevice.attach();
