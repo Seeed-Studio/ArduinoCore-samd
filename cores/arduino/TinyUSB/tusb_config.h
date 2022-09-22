@@ -44,7 +44,7 @@
   #define CFG_TUSB_RHPORT0_MODE       OPT_MODE_NONE
 #endif
 
-#define CFG_TUSB_OS                 OPT_OS_NONE
+#define CFG_TUSB_OS                 OPT_OS_FREERTOS
 
 #define CFG_TUSB_DEBUG              0
 #if CFG_TUSB_DEBUG
