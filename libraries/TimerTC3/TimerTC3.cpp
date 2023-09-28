@@ -88,7 +88,7 @@ void TimerTC3::setPeriod(long microseconds)
     while (TC->STATUS.bit.SYNCBUSY == 1)
         ;
 
-    TC->CC[0].reg = cycles;
+    TC->CC[0].reg = cycles - 1;
     while (TC->STATUS.bit.SYNCBUSY == 1)
         ;
 

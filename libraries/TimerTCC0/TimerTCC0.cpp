@@ -69,7 +69,7 @@ void TimerTCC0::setPeriod(long microseconds)
     
     //TC->CC[0].reg = cycles;
     //while(TC->SYNCBUSY.bit.CC0 == 1);
-    TC->PER.reg = cycles;              // Set counter Top using the PER register  
+    TC->PER.reg = cycles - 1;              // Set counter Top using the PER register  
     while (TC->SYNCBUSY.bit.PER == 1); // wait for sync 
     
 }
