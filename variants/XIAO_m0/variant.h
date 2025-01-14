@@ -69,10 +69,12 @@
 #define LED_BUILTIN PIN_LED
 
 
-#define PIN_LED_RXL          (12u)
-#define PIN_LED_TXL          (11u)
-#define PIN_LED2             PIN_LED_RXL
-#define PIN_LED3             PIN_LED_TXL
+#define PIN_LED2             (12u)
+#define PIN_LED3             (11u)
+#if defined(TXRXLED_ENABLE)
+#define PIN_LED_RXL          PIN_LED2
+#define PIN_LED_TXL          PIN_LED3
+#endif
 
 /*
  * Analog pins
