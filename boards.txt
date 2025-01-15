@@ -169,9 +169,12 @@ seeed_XIAO_m0.menu.sercom4.include=USART
 seeed_XIAO_m0.menu.sercom4.include.sercom4_flag=
 seeed_XIAO_m0.menu.sercom4.exclude=None
 seeed_XIAO_m0.menu.sercom4.exclude.sercom4_flag=-DNO_USART_INTERFACE
+seeed_XIAO_m0.menu.txrxled.on=On
+seeed_XIAO_m0.menu.txrxled.off=Off
+seeed_XIAO_m0.menu.txrxled.on.build.flags.txrxled=-DTXRXLED_ENABLE
 
 
-# Seeed XIAO M0 (SAMD21)
+# Seeed Wio Lite MG126 (SAMD21)
 # ------------------------------
 Wio_Lite_MG126.name=Seeeduino Wio lite MG126
 Wio_Lite_MG126.vid.0=0x2886
