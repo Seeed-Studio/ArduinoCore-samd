@@ -251,8 +251,8 @@ bool USBDeviceClass::sendDescriptor(USBSetup &setup)
 		}
 		else if (setup.wValueL == ISERIAL) {
 #ifdef PLUGGABLE_USB_ENABLED
-#ifdef USB_CUSTOM_SERIAL
 			char name[ISERIAL_MAX_LEN];
+#ifdef USB_CUSTOM_SERIAL
 			if (g_usbSerialNumber[0] != '\0') {
 				// if custom serial number is set, use it
 				strncpy(name, g_usbSerialNumber, ISERIAL_MAX_LEN - 1);
@@ -273,7 +273,6 @@ bool USBDeviceClass::sendDescriptor(USBSetup &setup)
 			#define SERIAL_NUMBER_WORD_2	*(volatile uint32_t*)(0x0080A044)
 			#define SERIAL_NUMBER_WORD_3	*(volatile uint32_t*)(0x0080A048)
 #endif
-			char name[ISERIAL_MAX_LEN];
 			utox8(SERIAL_NUMBER_WORD_0, &name[0]);
 			utox8(SERIAL_NUMBER_WORD_1, &name[8]);
 			utox8(SERIAL_NUMBER_WORD_2, &name[16]);
