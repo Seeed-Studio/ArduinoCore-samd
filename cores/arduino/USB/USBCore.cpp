@@ -1,6 +1,7 @@
 /*
   Copyright (c) 2016 Arduino LLC.  All right reserved.
   SAMD51 support added by Adafruit - Copyright (c) 2018 Dean Miller for Adafruit Industries
+  Custom Serial Number support added by mszwaj - Copyright (c) 2026
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -52,6 +53,11 @@ static volatile uint8_t rxLEDPulse; /**< Milliseconds remaining for data Rx LED 
 #endif
 static char isRemoteWakeUpEnabled = 0;
 static char isEndpointHalt = 0;
+
+#ifndef G_USB_SERIAL_EXTERN
+#define G_USB_SERIAL_EXTERN
+extern char g_usbSerialNumber[33];
+#endif
 
 extern void (*gpf_isr)(void);
 
@@ -245,25 +251,33 @@ bool USBDeviceClass::sendDescriptor(USBSetup &setup)
 		}
 		else if (setup.wValueL == ISERIAL) {
 #ifdef PLUGGABLE_USB_ENABLED
-#ifdef __SAMD51__
-			#define SERIAL_NUMBER_WORD_0	*(volatile uint32_t*)(0x008061FC)
-			#define SERIAL_NUMBER_WORD_1	*(volatile uint32_t*)(0x00806010)
-			#define SERIAL_NUMBER_WORD_2	*(volatile uint32_t*)(0x00806014)
-			#define SERIAL_NUMBER_WORD_3	*(volatile uint32_t*)(0x00806018)
-#else // samd21
-			// from section 9.3.3 of the datasheet
-			#define SERIAL_NUMBER_WORD_0	*(volatile uint32_t*)(0x0080A00C)
-			#define SERIAL_NUMBER_WORD_1	*(volatile uint32_t*)(0x0080A040)
-			#define SERIAL_NUMBER_WORD_2	*(volatile uint32_t*)(0x0080A044)
-			#define SERIAL_NUMBER_WORD_3	*(volatile uint32_t*)(0x0080A048)
-#endif
-			char name[ISERIAL_MAX_LEN];
-			utox8(SERIAL_NUMBER_WORD_0, &name[0]);
-			utox8(SERIAL_NUMBER_WORD_1, &name[8]);
-			utox8(SERIAL_NUMBER_WORD_2, &name[16]);
-			utox8(SERIAL_NUMBER_WORD_3, &name[24]);
-			name[32] = '\0';
-			return sendStringDescriptor((uint8_t*)name, setup.wLength);
+    char name[ISERIAL_MAX_LEN];
+
+    if (g_usbSerialNumber[0] != '\0') {
+        // if custom serial number is set, use it
+        strncpy(name, g_usbSerialNumber, ISERIAL_MAX_LEN - 1);
+        name[ISERIAL_MAX_LEN - 1] = '\0';
+    } else {
+		#ifdef __SAMD51__
+					#define SERIAL_NUMBER_WORD_0	*(volatile uint32_t*)(0x008061FC)
+					#define SERIAL_NUMBER_WORD_1	*(volatile uint32_t*)(0x00806010)
+					#define SERIAL_NUMBER_WORD_2	*(volatile uint32_t*)(0x00806014)
+					#define SERIAL_NUMBER_WORD_3	*(volatile uint32_t*)(0x00806018)
+		#else // samd21
+					// from section 9.3.3 of the datasheet
+					#define SERIAL_NUMBER_WORD_0	*(volatile uint32_t*)(0x0080A00C)
+					#define SERIAL_NUMBER_WORD_1	*(volatile uint32_t*)(0x0080A040)
+					#define SERIAL_NUMBER_WORD_2	*(volatile uint32_t*)(0x0080A044)
+					#define SERIAL_NUMBER_WORD_3	*(volatile uint32_t*)(0x0080A048)
+		#endif
+					char name[ISERIAL_MAX_LEN];
+					utox8(SERIAL_NUMBER_WORD_0, &name[0]);
+					utox8(SERIAL_NUMBER_WORD_1, &name[8]);
+					utox8(SERIAL_NUMBER_WORD_2, &name[16]);
+					utox8(SERIAL_NUMBER_WORD_3, &name[24]);
+					name[32] = '\0';
+	}
+	return sendStringDescriptor((uint8_t*)name, setup.wLength);
 #endif
 		}
 		else {
